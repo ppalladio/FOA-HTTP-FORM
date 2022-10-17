@@ -5,6 +5,8 @@ import { useState, useEffect } from 'react';
 
 const AvailableMeals = () => {
     const [meals, setMeals] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [first, setfirst] = useState(second)
     useEffect(() => {
         const fetchMeals = async () => {
             const res = await fetch(
@@ -22,10 +24,12 @@ const AvailableMeals = () => {
             }
             setMeals(LoadedMeals);
         };
-
+        setLoading(false);
         fetchMeals();
     }, []);
-
+    if (loading) {
+        return <section className={classes.loading}>page is loading</section>;
+    }
     const mealsList = meals.map((meal) => (
         <MealItem
             key={meal.id}
